@@ -4,6 +4,8 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.kolko.game.handlers.Content;
+import com.kolko.game.handlers.GameStateManager;
 
 public class Application extends ApplicationAdapter {
 	
@@ -16,20 +18,27 @@ public class Application extends ApplicationAdapter {
 	
 	private SpriteBatch batch;
 	private OrthographicCamera cam;
+	private GameStateManager gsm;
+	
+	public static Content res;
 	
 	public void create() {
 		
 		batch = new SpriteBatch();
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, WIDTH, HEIGHT);
+		res = new Content();
+		res.loadTexture("res/images/kolo.png", "kolo");
 		
+		gsm = new GameStateManager(this);
 	}
 	
 	public void render() {
 		accum += Gdx.graphics.getDeltaTime();
 		while(accum >= STEP) {
 			accum -= STEP;
-			
+			gsm.update(STEP);
+			gsm.render();
 		}
 	}
 	
