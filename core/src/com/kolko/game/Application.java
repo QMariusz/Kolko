@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kolko.game.handlers.Content;
 import com.kolko.game.handlers.GameStateManager;
+import com.kolko.game.handlers.MyInput;
+import com.kolko.game.handlers.MyInputProcessor;
 
 public class Application extends ApplicationAdapter {
 	
@@ -24,6 +26,8 @@ public class Application extends ApplicationAdapter {
 	
 	public void create() {
 		
+		Gdx.input.setInputProcessor(new MyInputProcessor());
+		
 		batch = new SpriteBatch();
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, WIDTH, HEIGHT);
@@ -39,6 +43,7 @@ public class Application extends ApplicationAdapter {
 			accum -= STEP;
 			gsm.update(STEP);
 			gsm.render();
+			MyInput.update();
 		}
 	}
 	

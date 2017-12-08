@@ -3,14 +3,12 @@ package com.kolko.game.handlers;
 import static com.kolko.game.handlers.B2DVars.PPM;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.blockbunny.handlers.MyInput;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -23,6 +21,7 @@ public class Play extends GameState{
 
 	private World world;
 	private OrthographicCamera b2dCam;
+	private MyContactListener c1;
 	
 	private Player player;
 	
@@ -30,6 +29,8 @@ public class Play extends GameState{
 		super(gsm);
 		
 		world = new World(new Vector2(0, -9.82f), true);
+		c1 = new MyContactListener();
+		world.setContactListener(c1);
 		b2dCam = new OrthographicCamera();
 		b2dCam.setToOrtho(false, Application.WIDTH / PPM, Application.HEIGHT / PPM);
 		createPlayer();
@@ -69,15 +70,17 @@ public class Play extends GameState{
 
 	@Override
 	public void handleInput() {
+		
 		if(MyInput.isPressed(MyInput.BUTTON1)) {
-			if(c1.isPLayerOnGround()) {
+		//	if(c1.isPLayerOnGround()) {
+			System.out.println("ej");
 				player.getBody().applyForceToCenter(0, 250, true);
-				  }
+		//		  }
 			}
 		
 		//switch button
 		if(MyInput.isPressed(MyInput.BUTTON2)) {
-			switchBlocks();
+	//		switchBlocks();
 		}
 	}
 

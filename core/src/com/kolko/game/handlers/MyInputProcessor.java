@@ -1,8 +1,9 @@
 package com.kolko.game.handlers;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputAdapter;
 
-public class MyInputProcessor {
+public class MyInputProcessor extends InputAdapter{
 	public boolean keyDown(int k) {
 		if(k == Keys.Z) {
 			MyInput.setKeys(MyInput.BUTTON1,  true);
