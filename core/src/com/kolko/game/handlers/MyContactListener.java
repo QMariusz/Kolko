@@ -1,17 +1,23 @@
 package com.kolko.game.handlers;
 
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.badlogic.gdx.utils.Array;
+import com.kolko.game.entities.Player;
 
 public class MyContactListener implements ContactListener{
 
 	private int numFootContacts;
+	private Array<Body> bodiesToRemove;
+	private Play play;
 	
 	public MyContactListener() {
 		super();
+		bodiesToRemove = new Array<Body>();
 	}
 	
 	public void beginContact(Contact contact) {
@@ -27,12 +33,20 @@ public class MyContactListener implements ContactListener{
 			numFootContacts++;
 		}
 		
+		if(fa.getUserData() != null &&( fa.getUserData().equals("s_circle") || fa.getUserData().equals("s_square") || fa.getUserData().equals("m_circle") || fa.getUserData().equals("m_square")) && fb.getUserData() != null && fb.getUserData().equals("player")) {
+			//remove crystal
+			bodiesToRemove.add(fa.getBody());
+		}
+		if(fb.getUserData() != null && (fb.getUserData().equals("s_circle") || fb.getUserData().equals("s_square") || fb.getUserData().equals("m_circle") || fb.getUserData().equals("m_square"))&& fa.getUserData() != null && fa.getUserData().equals("player")) {
+			//	System.out.println("fb is foot");
+			bodiesToRemove.add(fb.getBody());
+		}
+		
 	}
 	
 	public void endContact(Contact contact) {
 		Fixture fa = contact.getFixtureA();
 		Fixture fb = contact.getFixtureB();
-		System.out.println("decontact");
 		//if(fa == null || fb == null) return;
 		
 		if(fa.getUserData() != null && fa.getUserData().equals("foot")) {
@@ -44,7 +58,8 @@ public class MyContactListener implements ContactListener{
 			numFootContacts--;
 		}
 	}
-	
+	public Array<Body> getBodiesToRemove(){ return bodiesToRemove; } 
+
 	public boolean isPLayerOnGround() { return numFootContacts > 0; }
 
 	// collision detection

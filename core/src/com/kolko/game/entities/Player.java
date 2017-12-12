@@ -7,6 +7,10 @@ import com.kolko.game.Application;
 
 public class Player extends B2DSprite{
 
+	private float energy = 5;
+	private float maxEnergy = 10;
+	private int points;
+
 	public Player(Body body) {
 		super(body);
 		
@@ -14,5 +18,32 @@ public class Player extends B2DSprite{
 		TextureRegion[] sprites = TextureRegion.split(tex, 46, 46)[0];
 		setAnimation(sprites, 1 / 12f);
 	}
+	
+	@Override
+	public void update(float dt) {
+		animation.update(dt);
+		energy -= 0.01;
+	}
+	
+	public float getEnergy() {
+		return energy;
+	}
+	
+	public float getMaxEnergy() {
+		return maxEnergy;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void addPoints(int points) {
+		this.points += points;
+	}
+	
+	public void addSpeed(float f) {
+		body.setLinearVelocity(body.getLinearVelocity().x+f, body.getLinearVelocity().y);
+	}
+	
 	
 }

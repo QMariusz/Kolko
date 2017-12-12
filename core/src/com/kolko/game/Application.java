@@ -20,6 +20,7 @@ public class Application extends ApplicationAdapter {
 	
 	private SpriteBatch batch;
 	private OrthographicCamera cam;
+	private OrthographicCamera hudCam;
 	private GameStateManager gsm;
 	
 	public static Content res;
@@ -31,8 +32,17 @@ public class Application extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, WIDTH, HEIGHT);
+		hudCam = new OrthographicCamera();
+		hudCam.setToOrtho(false, WIDTH, HEIGHT);
+		
 		res = new Content();
 		res.loadTexture("res/images/kolo.png", "kolo");
+		res.loadTexture("res/images/s_circle.png", "s_circle");
+		res.loadTexture("res/images/m_circle.png", "m_circle");
+		res.loadTexture("res/images/g_circle.png", "g_circle");
+		res.loadTexture("res/images/s_square.png", "s_square");
+		res.loadTexture("res/images/m_square.png", "m_square");
+		res.loadTexture("res/images/background4.png", "background");
 		
 		gsm = new GameStateManager(this);
 	}
@@ -53,6 +63,7 @@ public class Application extends ApplicationAdapter {
 	
 	public SpriteBatch getSpriteBatch() { return batch; }
 	public OrthographicCamera getCamera() { return cam; }
+	public OrthographicCamera getHUDCamera() { return hudCam; }
 	
 	public void resize(int w, int h) {}
 	public void pause() {}
