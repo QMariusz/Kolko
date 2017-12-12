@@ -5,7 +5,6 @@ import static com.kolko.game.handlers.B2DVars.PPM;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -22,7 +21,9 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.kolko.game.Application;
 import com.kolko.game.alies.MCircle;
 import com.kolko.game.alies.SCircle;
@@ -44,7 +45,7 @@ public class Play extends GameState{
 	private TiledMap tileMap;
 	private OrthogonalTiledMapRenderer tmr;
 	private float tileSize;
-	
+	private Stage stage;
 	private Player player;
 	private SCircle s_circle;
 	private MCircle m_circle;
@@ -56,6 +57,7 @@ public class Play extends GameState{
 	private Texture background;
 	private int sourceX = 0;
 	private boolean energy = true;
+	private boolean isKnown = true;
 	
 	private boolean debug = false;
 	
@@ -68,11 +70,12 @@ public class Play extends GameState{
 		b2dCam = new OrthographicCamera();
 		b2dCam.setToOrtho(false, Application.WIDTH / PPM, Application.HEIGHT / PPM);
 		b2dr = new Box2DDebugRenderer();
-		 aElements= new Array<B2DSprite>();
-		
+		stage = new Stage(new StretchViewport(Application.WIDTH, Application.HEIGHT, hudCam));
+		aElements= new Array<B2DSprite>();
 		createPlayer();
 		
-		hud = new HUD(player);
+		
+		hud = new HUD(player, stage);
 		
 		createTiles();
 		
@@ -308,16 +311,26 @@ public class Play extends GameState{
 		//switch button
 		if(MyInput.isPressed(MyInput.BUTTON2)) {
 	//		switchBlocks();
+			System.out.println("dziala");
 		}
 	}
+	
+	public void reset() {
+		player.getBody().setTransform(new Vector2(0,0),player.getBody().getAngle());
+	}
+
 
 	@Override
 	public void update(float dt) {
-		
+	
 		handleInput();
 		
-		if(player.getEnergy()<=0) {
+		if(player.getEnergy()<=0 && !hud.getEndStage()) {
 		player.getBody().setLinearVelocity(0,-2);
+		hud.setEndStage(true);
+		System.out.println("true");
+		hud.initImage();
+		isKnown = false;
 		}
 		
 		world.step(dt, 6, 2);
@@ -378,6 +391,8 @@ public class Play extends GameState{
 		
 		sb.setProjectionMatrix(hudCam.combined);
 		hud.render(sb);
+	
+		
 		
 		if(debug) {
 		b2dr.render(world, b2dCam.combined);

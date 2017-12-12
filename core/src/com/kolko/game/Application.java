@@ -43,6 +43,7 @@ public class Application extends ApplicationAdapter {
 		res.loadTexture("res/images/s_square.png", "s_square");
 		res.loadTexture("res/images/m_square.png", "m_square");
 		res.loadTexture("res/images/background4.png", "background");
+		res.loadTexture("res/images/background.jpg", "end_stage");
 		
 		gsm = new GameStateManager(this);
 	}

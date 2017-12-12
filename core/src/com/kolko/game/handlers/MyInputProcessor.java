@@ -1,5 +1,6 @@
 package com.kolko.game.handlers;
 
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 
@@ -8,7 +9,7 @@ public class MyInputProcessor extends InputAdapter{
 		if(k == Keys.SPACE) {
 			MyInput.setKeys(MyInput.BUTTON1,  true);
 		}
-		if(k == Keys.X) {
+		if(k == Buttons.LEFT) {
 			MyInput.setKeys(MyInput.BUTTON2,  true);
 		}
 		return true;
@@ -18,7 +19,8 @@ public class MyInputProcessor extends InputAdapter{
 		if(k == Keys.SPACE) {
 			MyInput.setKeys(MyInput.BUTTON1,  false);
 		}
-		if(k == Keys.X) {
+		if(k == Buttons.LEFT){
+			System.out.println("odcisnieta");
 			MyInput.setKeys(MyInput.BUTTON2,  false);
 		}
 		return true;

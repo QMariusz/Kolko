@@ -7,8 +7,8 @@ import com.kolko.game.Application;
 
 public class Player extends B2DSprite{
 
-	private float energy = 5;
-	private float maxEnergy = 10;
+	private float energy = 1;
+	private float maxEnergy = 1;
 	private int points;
 
 	public Player(Body body) {
@@ -45,5 +45,7 @@ public class Player extends B2DSprite{
 		body.setLinearVelocity(body.getLinearVelocity().x+f, body.getLinearVelocity().y);
 	}
 	
-	
+	public void resetSpeed() {
+		this.energy = maxEnergy;
+	}
 }
