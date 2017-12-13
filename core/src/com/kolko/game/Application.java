@@ -27,7 +27,7 @@ public class Application extends ApplicationAdapter {
 	
 	public void create() {
 		
-		Gdx.input.setInputProcessor(new MyInputProcessor());
+	//	Gdx.input.setInputProcessor(new MyInputProcessor());
 		
 		batch = new SpriteBatch();
 		cam = new OrthographicCamera();
@@ -44,6 +44,7 @@ public class Application extends ApplicationAdapter {
 		res.loadTexture("res/images/m_square.png", "m_square");
 		res.loadTexture("res/images/background4.png", "background");
 		res.loadTexture("res/images/background.jpg", "end_stage");
+		res.loadTexture("res/images/upgrade.png", "upgrade");
 		
 		gsm = new GameStateManager(this);
 	}
