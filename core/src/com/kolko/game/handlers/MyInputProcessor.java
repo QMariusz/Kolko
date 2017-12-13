@@ -9,7 +9,7 @@ public class MyInputProcessor extends InputAdapter{
 		if(k == Keys.SPACE) {
 			MyInput.setKeys(MyInput.BUTTON1,  true);
 		}
-		if(k == Buttons.LEFT) {
+		if(k == Keys.R) {
 			MyInput.setKeys(MyInput.BUTTON2,  true);
 		}
 		return true;
@@ -19,7 +19,7 @@ public class MyInputProcessor extends InputAdapter{
 		if(k == Keys.SPACE) {
 			MyInput.setKeys(MyInput.BUTTON1,  false);
 		}
-		if(k == Buttons.LEFT){
+		if(k == Keys.R){
 			System.out.println("odcisnieta");
 			MyInput.setKeys(MyInput.BUTTON2,  false);
 		}

@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -46,15 +44,7 @@ public class HUD {
 		endStageImage.setY(7);
 		endStageImage.setWidth(50);
         endStageImage.setHeight(26);
-		endStageImage.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
-				
-				clickUpgrades();
-				return true;
-			}
-		});
+	//	endStageImage.addListener(new MyInput());
 		stage.addActor(endStageImage);
 	}
 
