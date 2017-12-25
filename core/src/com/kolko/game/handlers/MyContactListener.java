@@ -33,11 +33,20 @@ public class MyContactListener implements ContactListener{
 			numFootContacts++;
 		}
 		
-		if(fa.getUserData() != null &&( fa.getUserData().equals("s_circle") || fa.getUserData().equals("s_square") || fa.getUserData().equals("m_circle") || fa.getUserData().equals("m_square")) && fb.getUserData() != null && fb.getUserData().equals("player")) {
+		if(fa.getUserData() != null &&( fa.getUserData().equals("s_circle") || fa.getUserData().equals("s_square") ||
+				fa.getUserData().equals("m_circle") || fa.getUserData().equals("m_square") || fa.getUserData().equals("b_square")
+				|| fa.getUserData().equals("b_circle") || fa.getUserData().equals("bomb") || fa.getUserData().equals("turbo")
+				|| fa.getUserData().equals("bird") || fa.getUserData().equals("power") || fa.getUserData().equals("points")
+				|| fa.getUserData().equals("regen")) && fb.getUserData() != null &&
+				fb.getUserData().equals("player")) {
 			//remove crystal
 			bodiesToRemove.add(fa.getBody());
 		}
-		if(fb.getUserData() != null && (fb.getUserData().equals("s_circle") || fb.getUserData().equals("s_square") || fb.getUserData().equals("m_circle") || fb.getUserData().equals("m_square"))&& fa.getUserData() != null && fa.getUserData().equals("player")) {
+		if(fb.getUserData() != null && (fb.getUserData().equals("s_circle") || fb.getUserData().equals("s_square") || 
+				fb.getUserData().equals("m_circle") || fb.getUserData().equals("m_square") || fb.getUserData().equals("b_square")
+				 || fb.getUserData().equals("b_circle") || fb.getUserData().equals("bomb")  || fb.getUserData().equals("turbo")
+				 || fb.getUserData().equals("bird") || fb.getUserData().equals("power") || fb.getUserData().equals("points")
+				 || fb.getUserData().equals("regen"))&& fa.getUserData() != null && fa.getUserData().equals("player")) {
 			//	System.out.println("fb is foot");
 			bodiesToRemove.add(fb.getBody());
 		}
@@ -59,6 +68,7 @@ public class MyContactListener implements ContactListener{
 		}
 	}
 	public Array<Body> getBodiesToRemove(){ return bodiesToRemove; } 
+	public void clearBodiesToRemove(){ bodiesToRemove.clear();; } 
 
 	public boolean isPLayerOnGround() { return numFootContacts > 0; }
 
